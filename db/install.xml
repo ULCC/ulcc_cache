@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/ulcc_cache/db" VERSION="20120419" COMMENT="XMLDB file for Moodle local/ulcc_cache"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="ulcc_cache" COMMENT="Default comment for ulcc_cache, please edit me" NEXT="ulcc_cacheregister">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="cid"/>
+        <FIELD NAME="cid" TYPE="char" LENGTH="250" NOTNULL="true" SEQUENCE="false" COMMENT="The id (unique to the plugin) of the data being saved" PREVIOUS="id" NEXT="plugin"/>
+        <FIELD NAME="plugin" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The name of the plugin that is using the cache class" PREVIOUS="cid" NEXT="data"/>
+        <FIELD NAME="data" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" COMMENT="holds the data being cached" PREVIOUS="plugin" NEXT="type"/>
+        <FIELD NAME="type" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="the type of caching being performed,  tempory = 0 permanent = 1   or expiretime = 2" PREVIOUS="data" NEXT="expiration"/>
+        <FIELD NAME="expiration" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="The expiration time of the cached data if set" PREVIOUS="type" NEXT="serialized"/>
+        <FIELD NAME="serialized" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="was the data serialized by the caching class" PREVIOUS="expiration" NEXT="misc"/>
+        <FIELD NAME="misc" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="miscellaneous data" PREVIOUS="serialized" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" COMMENT="a unxi timestamp of the time that the cache data was created" PREVIOUS="misc"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="ulcc_cacheregister" COMMENT="Default comment for the table, please edit me" PREVIOUS="ulcc_cache">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
