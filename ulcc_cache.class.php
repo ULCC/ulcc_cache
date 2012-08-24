@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../config.php");
+
 require_once('constants.php');
 
 class ulcc_cache {
